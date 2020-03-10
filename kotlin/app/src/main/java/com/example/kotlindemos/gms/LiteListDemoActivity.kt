@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.kotlindemos
+package com.example.kotlindemos.gms
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kotlindemos.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer

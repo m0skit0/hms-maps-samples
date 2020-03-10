@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.kotlindemos
+package com.example.kotlindemos.gms
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -43,6 +43,7 @@ import android.widget.CheckBox
 import android.widget.SeekBar
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kotlindemos.R
 import java.util.Arrays
 
 /**

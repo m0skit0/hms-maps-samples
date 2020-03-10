@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.kotlindemos
+package com.example.kotlindemos.gms
 
 import android.graphics.Color
 import android.os.Bundle
@@ -24,6 +24,7 @@ import android.widget.CompoundButton
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kotlindemos.R
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap

@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val listAdapter: ListAdapter = CustomArrayAdapter(this, DemoDetailsList.DEMOS)
+        val listAdapter: ListAdapter = CustomArrayAdapter(this, DemoDetailsList.GMS_DEMOS)
 
         // Find the view that will show empty message if there is no demo in DemoDetailsList.DEMOS
         val emptyMessage = findViewById<View>(R.id.empty)

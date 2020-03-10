@@ -15,7 +15,7 @@
  */
 
 
-package com.example.kotlindemos
+package com.example.kotlindemos.gms
 
 import android.graphics.Color
 import android.os.Bundle
@@ -26,6 +26,7 @@ import android.widget.Spinner
 import android.widget.CheckBox
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kotlindemos.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.Dash
 import com.google.android.gms.maps.model.Dot

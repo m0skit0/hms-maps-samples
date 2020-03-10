@@ -38,19 +38,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BasicMapDemoActivity" />
-        <activity android:name=".CameraDemoActivity"/>
-        <activity android:name=".CircleDemoActivity" />
-        <activity android:name=".CloseInfoWindowDemoActivity" />
-        <activity android:name=".LayersDemoActivity"/>
-        <activity android:name=".LiteListDemoActivity" />
-        <activity android:name=".MarkerDemoActivity"/>
-        <activity android:name=".PolygonDemoActivity"/>
-        <activity android:name=".PolylineDemoActivity"/>
+        <activity android:name=".gms.BasicMapDemoActivity" />
+        <activity android:name=".gms.CameraDemoActivity"/>
+        <activity android:name=".gms.CircleDemoActivity" />
+        <activity android:name=".gms.CloseInfoWindowDemoActivity" />
+        <activity android:name=".gms.LayersDemoActivity"/>
+        <activity android:name=".gms.LiteListDemoActivity" />
+        <activity android:name=".gms.MarkerDemoActivity"/>
+        <activity android:name=".gms.PolygonDemoActivity"/>
+        <activity android:name=".gms.PolylineDemoActivity"/>
         <activity android:name=".StreetViewPanoramaNavigationDemoActivity" />
-        <activity android:name=".TagsDemoActivity"/>
-        <activity android:name=".UiSettingsDemoActivity" />
-        <activity android:name=".VisibleRegionDemoActivity"/>
+        <activity android:name=".gms.TagsDemoActivity"/>
+        <activity android:name=".gms.UiSettingsDemoActivity" />
+        <activity android:name=".gms.VisibleRegionDemoActivity"/>
     </application>
 
 </manifest>

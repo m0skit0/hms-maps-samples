@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.kotlindemos
+package com.example.kotlindemos.gms
 
 import android.annotation.SuppressLint
 import android.os.Build

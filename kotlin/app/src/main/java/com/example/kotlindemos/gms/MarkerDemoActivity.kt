@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.kotlindemos
+package com.example.kotlindemos.gms
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -40,6 +40,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import com.example.kotlindemos.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter
@@ -318,7 +319,7 @@ class MarkerDemoActivity :
                     title = "Darwin Marker ${it + 1}",
                     snippet = "z-index initially ${it + 1}",
                     zIndex = it.toFloat()
-                )
+            )
             )
         }
 

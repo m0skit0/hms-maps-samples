@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.example.kotlindemos
+package com.example.kotlindemos.gms
 
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kotlindemos.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -200,15 +201,18 @@ class TagsDemoActivity : AppCompatActivity(),
     }
 
     override fun onCircleClick(circle: Circle) {
-        onClick(circle.tag as? CustomTag ?: return)
+        onClick(circle.tag as? CustomTag
+                ?: return)
     }
 
     override fun onGroundOverlayClick(groundOverlay: GroundOverlay) {
-        onClick(groundOverlay.tag as? CustomTag ?: return)
+        onClick(groundOverlay.tag as? CustomTag
+                ?: return)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        onClick(marker.tag as? CustomTag ?: return false)
+        onClick(marker.tag as? CustomTag
+                ?: return false)
         // We return true to indicate that we have consumed the event and that we do not wish
         // for the default behavior to occur (which is for the camera to move such that the
         // marker is centered and for the marker's info window to open, if it has one).
@@ -216,11 +220,13 @@ class TagsDemoActivity : AppCompatActivity(),
     }
 
     override fun onPolygonClick(polygon: Polygon) {
-        onClick(polygon.tag as? CustomTag ?: return)
+        onClick(polygon.tag as? CustomTag
+                ?: return)
     }
 
     override fun onPolylineClick(polyline: Polyline) {
-        onClick(polyline.tag as? CustomTag ?: return)
+        onClick(polyline.tag as? CustomTag
+                ?: return)
     }
 
 }
