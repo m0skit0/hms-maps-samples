@@ -39,4 +39,6 @@ dependencies {
     // Below is used to run the easypermissions library to manage location permissions
     // EasyPermissions is needed to help us request for permission to access location
     implementation 'pub.devrel:easypermissions:1.1.1'
+
+    implementation 'com.huawei.hms:maps:4.0.0.302'
 }
