@@ -19,6 +19,10 @@
     <string name="no_demos">No demos</string>
     <string name="play_services_not_installed">Google Play services is not installed on this device.</string>
 
+    <!-- Demos title -->
+    <string name="demos_gms">GMS Demos</string>
+    <string name="demos_hms">HMS Demos</string>
+
     <!-- Basic Map Demo -->
     <string name="basic_demo_label">Basic Map</string>
     <string name="basic_demo_details">Launches a map with marker pointing at Sydney.</string>

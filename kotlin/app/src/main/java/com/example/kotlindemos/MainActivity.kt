@@ -22,17 +22,33 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListAdapter
-import android.widget.ListView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
+import com.huawei.hms.api.HuaweiApiAvailability
 
 /**
  * The main activity of the API library demo gallery.
  * The main layout lists the demonstrated features, with buttons to launch them.
  */
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
+
+    private val demosList: List<DemoDetails>
+        get() =
+            when {
+                isGMSAvailable() -> DemoDetailsList.GMS_DEMOS
+                isHMSAvailable() -> DemoDetailsList.HMS_DEMOS
+                else -> emptyList()
+            }
+
+    private val demosTitle: String
+        get() =
+            when {
+                isGMSAvailable() -> R.string.demos_gms
+                isHMSAvailable() -> R.string.demos_hms
+                else -> R.string.no_demos
+            }.let { getString(it) }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val demo: DemoDetails = parent?.adapter?.getItem(position) as DemoDetails
@@ -42,7 +58,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val listAdapter: ListAdapter = CustomArrayAdapter(this, DemoDetailsList.GMS_DEMOS)
+        val listAdapter: ListAdapter = CustomArrayAdapter(this, demosList)
+
+        val title = findViewById<TextView>(R.id.demos_title)
+        title.text = demosTitle
 
         // Find the view that will show empty message if there is no demo in DemoDetailsList.DEMOS
         val emptyMessage = findViewById<View>(R.id.empty)
@@ -51,7 +70,19 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             onItemClickListener = this@MainActivity
             emptyView = emptyMessage
         }
+
+
     }
+
+    private fun isGMSAvailable(): Boolean =
+            GoogleApiAvailability
+                    .getInstance()
+                    .isGooglePlayServicesAvailable(applicationContext) == ConnectionResult.SUCCESS
+
+    private fun isHMSAvailable(): Boolean =
+            HuaweiApiAvailability
+                    .getInstance()
+                    .isHuaweiMobileNoticeAvailable(applicationContext) == com.huawei.hms.api.ConnectionResult.SUCCESS
 
     /**
      * A custom array adapter that shows a {@link FeatureView} containing details about the demo.

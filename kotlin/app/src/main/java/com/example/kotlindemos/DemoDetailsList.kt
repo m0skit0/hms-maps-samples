@@ -42,10 +42,6 @@ object DemoDetailsList {
                     PolygonDemoActivity::class.java),
             DemoDetails(R.string.polyline_demo_label, R.string.polyline_demo_description,
                     PolylineDemoActivity::class.java),
-            DemoDetails(
-                    R.string.street_view_panorama_navigation_demo_label,
-                    R.string.street_view_panorama_navigation_demo_details,
-                    StreetViewPanoramaNavigationDemoActivity::class.java),
             DemoDetails(R.string.tags_demo_label, R.string.tags_demo_details,
                     TagsDemoActivity::class.java),
             DemoDetails(R.string.ui_settings_demo_label, R.string.ui_settings_demo_details,
@@ -73,10 +69,6 @@ object DemoDetailsList {
                     com.example.kotlindemos.hms.PolygonDemoActivity::class.java),
             DemoDetails(R.string.polyline_demo_label, R.string.polyline_demo_description,
                     com.example.kotlindemos.hms.PolylineDemoActivity::class.java),
-            DemoDetails(
-                    R.string.street_view_panorama_navigation_demo_label,
-                    R.string.street_view_panorama_navigation_demo_details,
-                    StreetViewPanoramaNavigationDemoActivity::class.java),
             DemoDetails(R.string.tags_demo_label, R.string.tags_demo_details,
                     com.example.kotlindemos.hms.TagsDemoActivity::class.java),
             DemoDetails(R.string.ui_settings_demo_label, R.string.ui_settings_demo_details,
