@@ -42,13 +42,13 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 else -> emptyList()
             }
 
-    private val demosTitle: String
+    private val demosTitle: Int
         get() =
             when {
                 isGMSAvailable() -> R.string.demos_gms
                 isHMSAvailable() -> R.string.demos_hms
                 else -> R.string.no_demos
-            }.let { getString(it) }
+            }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val demo: DemoDetails = parent?.adapter?.getItem(position) as DemoDetails
@@ -58,10 +58,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val listAdapter: ListAdapter = CustomArrayAdapter(this, demosList)
+        setTitle(demosTitle)
 
-        val title = findViewById<TextView>(R.id.demos_title)
-        title.text = demosTitle
+        val listAdapter: ListAdapter = CustomArrayAdapter(this, demosList)
 
         // Find the view that will show empty message if there is no demo in DemoDetailsList.DEMOS
         val emptyMessage = findViewById<View>(R.id.empty)
@@ -70,8 +69,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
             onItemClickListener = this@MainActivity
             emptyView = emptyMessage
         }
-
-
     }
 
     private fun isGMSAvailable(): Boolean =
