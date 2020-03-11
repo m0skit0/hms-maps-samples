@@ -38,6 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".gms.BasicMapDemoActivity" />
         <activity android:name=".gms.CameraDemoActivity"/>
         <activity android:name=".gms.CircleDemoActivity" />
@@ -47,10 +48,22 @@
         <activity android:name=".gms.MarkerDemoActivity"/>
         <activity android:name=".gms.PolygonDemoActivity"/>
         <activity android:name=".gms.PolylineDemoActivity"/>
-        <activity android:name=".StreetViewPanoramaNavigationDemoActivity" />
         <activity android:name=".gms.TagsDemoActivity"/>
         <activity android:name=".gms.UiSettingsDemoActivity" />
         <activity android:name=".gms.VisibleRegionDemoActivity"/>
+
+        <activity android:name=".hms.BasicMapDemoActivity" />
+        <activity android:name=".hms.CameraDemoActivity"/>
+        <activity android:name=".hms.CircleDemoActivity" />
+        <activity android:name=".hms.CloseInfoWindowDemoActivity" />
+        <activity android:name=".hms.LayersDemoActivity"/>
+        <activity android:name=".hms.LiteListDemoActivity" />
+        <activity android:name=".hms.MarkerDemoActivity"/>
+        <activity android:name=".hms.PolygonDemoActivity"/>
+        <activity android:name=".hms.PolylineDemoActivity"/>
+        <activity android:name=".hms.TagsDemoActivity"/>
+        <activity android:name=".hms.UiSettingsDemoActivity" />
+        <activity android:name=".hms.VisibleRegionDemoActivity"/>
     </application>
 
 </manifest>
