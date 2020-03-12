@@ -1,3 +1,5 @@
 /build
 /debug
 agconnect-services.json
+signing.gradle
+*.jks
