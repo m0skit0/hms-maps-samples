@@ -39,6 +39,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".DemoListActivity"/>
+
         <activity android:name=".gms.BasicMapDemoActivity" />
         <activity android:name=".gms.CameraDemoActivity"/>
         <activity android:name=".gms.CircleDemoActivity" />
