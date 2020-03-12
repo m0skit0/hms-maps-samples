@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'com.huawei.agconnect'
 
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.example.kotlindemos"
+        applicationId "com.demos.maps"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
