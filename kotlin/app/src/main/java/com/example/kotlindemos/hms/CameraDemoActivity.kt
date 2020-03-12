@@ -74,7 +74,7 @@ class CameraDemoActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.camera_demo)
+        setContentView(R.layout.camera_demo_hms)
 
         animateToggle = findViewById(R.id.animate)
         customDurationToggle = findViewById(R.id.duration_toggle)

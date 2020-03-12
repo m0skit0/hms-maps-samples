@@ -105,7 +105,7 @@ class LiteListDemoActivity : AppCompatActivity() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val inflated = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.lite_list_demo_row, parent, false)
+                    .inflate(R.layout.lite_list_demo_row_hms, parent, false)
             return ViewHolder(inflated)
         }
 
