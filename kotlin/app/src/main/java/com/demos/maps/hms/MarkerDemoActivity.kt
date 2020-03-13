@@ -256,7 +256,7 @@ class MarkerDemoActivity :
                         title = "Brisbane",
                         snippet = "Population: 2,074,200",
                         icon = BitmapDescriptorFactory
-                                .defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
+                                .defaultMarker(BitmapDescriptorFactory.HUE_RED)
                 ),
 
                 // Uses a custom icon with the info window popping out of the center of the icon.
@@ -476,7 +476,7 @@ class PlaceDetails(
         val position: LatLng,
         val title: String = "Marker",
         val snippet: String? = null,
-        val icon: BitmapDescriptor = BitmapDescriptorFactory.defaultMarker(),
+        val icon: BitmapDescriptor? = BitmapDescriptorFactory.defaultMarker(),
         val infoWindowAnchorX: Float = 0.5F,
         val infoWindowAnchorY: Float = 0F,
         val draggable: Boolean = false,
