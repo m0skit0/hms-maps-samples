@@ -53,6 +53,7 @@
         <activity android:name=".gms.TagsDemoActivity"/>
         <activity android:name=".gms.UiSettingsDemoActivity" />
         <activity android:name=".gms.VisibleRegionDemoActivity"/>
+        <activity android:name=".gms.GeocodingDemoActivity"/>
 
         <activity android:name=".hms.BasicMapDemoActivity" />
         <activity android:name=".hms.CameraDemoActivity"/>
