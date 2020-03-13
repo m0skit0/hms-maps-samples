@@ -67,6 +67,7 @@
         <activity android:name=".hms.TagsDemoActivity"/>
         <activity android:name=".hms.UiSettingsDemoActivity" />
         <activity android:name=".hms.VisibleRegionDemoActivity"/>
+        <activity android:name=".hms.GeocodingDemoActivity"/>
     </application>
 
 </manifest>

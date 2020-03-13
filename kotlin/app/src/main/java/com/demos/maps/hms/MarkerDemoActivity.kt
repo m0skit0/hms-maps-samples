@@ -47,6 +47,8 @@ import com.huawei.hms.maps.SupportMapFragment
 import com.huawei.hms.maps.model.*
 import java.util.ArrayList
 import java.util.Random
+import kotlin.math.cos
+import kotlin.math.sin
 
 /**
  * This shows how to place markers on a map.
@@ -333,8 +335,8 @@ class MarkerDemoActivity :
         (0 until numMarkersInRainbow).mapTo(markerRainbow) {
             map.addMarker(MarkerOptions().apply{
                 position(LatLng(
-                        -30 + 10 * Math.sin(it * Math.PI / (numMarkersInRainbow - 1)),
-                        135 - 10 * Math.cos(it * Math.PI / (numMarkersInRainbow - 1))))
+                        -30 + 10 * sin(it * Math.PI / (numMarkersInRainbow - 1)),
+                        135 - 10 * cos(it * Math.PI / (numMarkersInRainbow - 1))))
                 title("Marker $it")
                 icon(BitmapDescriptorFactory.defaultMarker((it * 360 / numMarkersInRainbow)
                         .toFloat()))
