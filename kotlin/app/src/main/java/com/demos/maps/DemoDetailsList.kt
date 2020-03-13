@@ -48,7 +48,9 @@ object DemoDetailsList {
             DemoDetails(R.string.ui_settings_demo_label, R.string.ui_settings_demo_details,
                     UiSettingsDemoActivity::class.java),
             DemoDetails(R.string.region_demo_label, R.string.region_demo_details,
-                    VisibleRegionDemoActivity::class.java)
+                    VisibleRegionDemoActivity::class.java),
+            DemoDetails(R.string.geocoding_label, R.string.geocoding_demo_details,
+                    GeocodingDemoActivity::class.java)
     )
     val HMS_DEMOS = listOf(
             DemoDetails(R.string.basic_demo_label, R.string.basic_demo_details,
@@ -75,6 +77,8 @@ object DemoDetailsList {
             DemoDetails(R.string.ui_settings_demo_label, R.string.ui_settings_demo_details,
                     com.demos.maps.hms.UiSettingsDemoActivity::class.java),
             DemoDetails(R.string.region_demo_label, R.string.region_demo_details,
-                    com.demos.maps.hms.VisibleRegionDemoActivity::class.java)
+                    com.demos.maps.hms.VisibleRegionDemoActivity::class.java),
+            DemoDetails(R.string.geocoding_label, R.string.geocoding_demo_details,
+                    com.demos.maps.hms.GeocodingDemoActivity::class.java)
     )
 }

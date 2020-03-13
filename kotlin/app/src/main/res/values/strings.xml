@@ -174,4 +174,9 @@
     <string name="vr_opera_house_button">SOH</string>
     <string name="vr_sfo_button">SFO</string>
     <string name="vr_australia_button">AUS</string>
+    <string name="query">Query</string>
+    <string name="no_geocoder">No geocoder</string>
+    <string name="geocoding_label">Geocoding Demo</string>
+    <string name="geocoding_demo_details">Demonstrates how to mark an address on the map.</string>
+    <string name="error">An error happened</string>
 </resources>
