@@ -9,9 +9,9 @@ import com.demos.maps.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
 import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.*
 import retrofit2.Call
@@ -20,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 import java.io.IOException
+
 
 data class Directions(
         @SerializedName("geocoded_waypoints")
@@ -186,10 +187,9 @@ class RouteDemoActivity : AppCompatActivity() {
         }
 
         GlobalScope.launch(Dispatchers.Main) {
-            askDirectionsAsync().await()?.run {
-                setMarkers()
-                toast("Got directions!")
-            } ?: toast(R.string.error)
+            askDirectionsAsync().await()
+                    ?.setMarkers()
+                    ?.drawRoute() ?: toast(R.string.error)
         }
     }
 
@@ -203,16 +203,17 @@ class RouteDemoActivity : AppCompatActivity() {
                                 if (isSuccessful) {
                                     body()
                                 } else {
+                                    logError(errorBody()?.string())
                                     null
                                 }
                             }
                 } catch (e: IOException) {
-                    Log.e(javaClass.simpleName, e.message, e)
+                    logError(e.message, e)
                     null
                 }
             }
 
-    private fun Directions.setMarkers() {
+    private fun Directions.setMarkers(): Directions = apply {
         routes[0].legs[0].run {
             val startLocation = LatLng(startLocation.lat, startLocation.lng)
             val startMarker = MarkerOptions().position(startLocation)
@@ -227,12 +228,52 @@ class RouteDemoActivity : AppCompatActivity() {
         }
     }
 
+    private fun Directions.drawRoute(): Directions = apply {
+        val polylineOptions = PolylineOptions()
+                .geodesic(true)
+                .color(resources.getColor(R.color.colorPrimary))
+                .addAll(routes[0].overviewPolyline.points.decodePath())
+        map.addPolyline(polylineOptions)
+    }
+
+    private fun String.decodePath(): List<LatLng> {
+        val len = length
+        // For speed we preallocate to an upper bound on the final length, then
+        // truncate the array before returning.
+        val path: MutableList<LatLng> = mutableListOf()
+        var index = 0
+        var lat = 0
+        var lng = 0
+        while (index < len) {
+            var result = 1
+            var shift = 0
+            var b: Int
+            do {
+                b = this[index++].toInt() - 63 - 1
+                result += b shl shift
+                shift += 5
+            } while (b >= 0x1f)
+            lat += if (result and 1 != 0) (result shr 1).inv() else result shr 1
+            result = 1
+            shift = 0
+            do {
+                b = this[index++].toInt() - 63 - 1
+                result += b shl shift
+                shift += 5
+            } while (b >= 0x1f)
+            lng += if (result and 1 != 0) (result shr 1).inv() else result shr 1
+            path.add(LatLng(lat * 1e-5, lng * 1e-5))
+        }
+        return path
+    }
 
     private fun toast(@StringRes id: Int) {
         Toast.makeText(this, id, Toast.LENGTH_LONG).show()
     }
 
-    private fun toast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    private fun logError(message: String?, error: Throwable? = null) {
+        error?.run {
+            Log.e(javaClass.simpleName, message, error)
+        } ?: Log.e(javaClass.simpleName, message ?: "")
     }
 }
