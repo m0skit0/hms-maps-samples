@@ -20,6 +20,6 @@
     android:name="com.huawei.hms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hms.BasicMapDemoActivity">
+    tools:context=".hms.BasicMapDemoActivity">
 
 </fragment>

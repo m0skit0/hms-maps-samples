@@ -178,5 +178,7 @@
     <string name="no_geocoder">No geocoder</string>
     <string name="geocoding_label">Geocoding Demo</string>
     <string name="geocoding_demo_details">Demonstrates how to mark an address on the map.</string>
-    <string name="error">An error happened</string>
+    <string name="error">An error happened!</string>
+    <string name="route_demo_label">Route Demo</string>
+    <string name="route_demo_details">Demonstrates how to get and plot a route on the map</string>
 </resources>

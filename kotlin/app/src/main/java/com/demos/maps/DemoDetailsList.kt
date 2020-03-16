@@ -50,7 +50,9 @@ object DemoDetailsList {
             DemoDetails(R.string.region_demo_label, R.string.region_demo_details,
                     VisibleRegionDemoActivity::class.java),
             DemoDetails(R.string.geocoding_label, R.string.geocoding_demo_details,
-                    GeocodingDemoActivity::class.java)
+                    GeocodingDemoActivity::class.java),
+            DemoDetails(R.string.route_demo_label, R.string.route_demo_details,
+                    RouteDemoActivity::class.java)
     )
     val HMS_DEMOS = listOf(
             DemoDetails(R.string.basic_demo_label, R.string.basic_demo_details,

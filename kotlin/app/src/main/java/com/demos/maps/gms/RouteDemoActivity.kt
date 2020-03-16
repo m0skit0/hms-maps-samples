@@ -1,9 +1,19 @@
 package com.demos.maps.gms
 
+import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import com.demos.maps.R
 import com.google.gson.annotations.SerializedName
+import kotlinx.coroutines.*
 import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
+import java.io.IOException
 
 data class Directions(
         @SerializedName("geocoded_waypoints")
@@ -141,8 +151,60 @@ data class Step(
 
 interface MapsApi {
     @GET("json")
-    fun getDirections(origin: String, destination: String, key: String): Call<Directions>
+    fun getDirections(
+            @Query("origin") origin: String,
+            @Query("destination") destination: String,
+            @Query("key") key: String
+    ): Call<Directions>
 }
 
 class RouteDemoActivity : AppCompatActivity() {
+
+    private val BASE_URL = "https://maps.googleapis.com/maps/api/directions/"
+
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_route_demo)
+
+        GlobalScope.launch(Dispatchers.Main) {
+            askDirectionsAsync().await()?.run {
+                toast("Got directions!")
+            } ?: toast(R.string.error)
+        }
+    }
+
+    private fun askDirectionsAsync(): Deferred<Directions?> =
+            GlobalScope.async(Dispatchers.IO) {
+                try {
+                    retrofit.create(MapsApi::class.java)
+                            .getDirections("Toronto", "Montreal", getString(R.string.google_maps_key))
+                            .execute()
+                            .run {
+                                if (isSuccessful) {
+                                    body()
+                                } else {
+                                    null
+                                }
+                            }
+                } catch (e: IOException) {
+                    Log.e(javaClass.simpleName, e.message, e)
+                    null
+                }
+            }
+
+
+    private fun toast(@StringRes id: Int) {
+        Toast.makeText(this, id, Toast.LENGTH_LONG).show()
+    }
+
+    private fun toast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
 }
