@@ -1,4 +1,4 @@
-package com.demos.maps.gms
+package com.demos.maps.hms
 
 import android.os.Bundle
 import android.util.Log
@@ -6,13 +6,13 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.demos.maps.R
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
 import com.google.gson.annotations.SerializedName
+import com.huawei.hms.maps.CameraUpdateFactory
+import com.huawei.hms.maps.HuaweiMap
+import com.huawei.hms.maps.SupportMapFragment
+import com.huawei.hms.maps.model.LatLng
+import com.huawei.hms.maps.model.MarkerOptions
+import com.huawei.hms.maps.model.PolylineOptions
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -175,11 +175,11 @@ class RouteDemoActivity : AppCompatActivity() {
                 .build()
     }
 
-    private lateinit var map: GoogleMap
+    private lateinit var map: HuaweiMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_route_demo)
+        setContentView(R.layout.activity_route_demo_hms)
 
         (supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).getMapAsync {
             map = it
