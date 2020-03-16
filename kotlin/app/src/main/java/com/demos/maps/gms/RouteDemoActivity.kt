@@ -6,6 +6,12 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.demos.maps.R
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.*
 import retrofit2.Call
@@ -169,12 +175,19 @@ class RouteDemoActivity : AppCompatActivity() {
                 .build()
     }
 
+    private lateinit var map: GoogleMap
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_route_demo)
 
+        (supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).getMapAsync {
+            map = it
+        }
+
         GlobalScope.launch(Dispatchers.Main) {
             askDirectionsAsync().await()?.run {
+                setMarkers()
                 toast("Got directions!")
             } ?: toast(R.string.error)
         }
@@ -198,6 +211,21 @@ class RouteDemoActivity : AppCompatActivity() {
                     null
                 }
             }
+
+    private fun Directions.setMarkers() {
+        routes[0].legs[0].run {
+            val startLocation = LatLng(startLocation.lat, startLocation.lng)
+            val startMarker = MarkerOptions().position(startLocation)
+            map.addMarker(startMarker)
+
+            val endLocation = LatLng(endLocation.lat, endLocation.lng)
+            val endMarker = MarkerOptions().position(endLocation)
+            map.addMarker(endMarker)
+
+            val cameraUpdate = CameraUpdateFactory.newLatLngZoom(startLocation, 5f)
+            map.moveCamera(cameraUpdate)
+        }
+    }
 
 
     private fun toast(@StringRes id: Int) {
