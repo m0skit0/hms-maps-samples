@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright 2018 Google LLC
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -80,7 +79,7 @@
                     android:layout_weight="0.5"
                     android:onClick="onClearMap"
                     android:text="@string/clear_map"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="?android:attr/borderlessButtonStyle" />
 
                 <Button
                     android:layout_width="wrap_content"
@@ -88,7 +87,7 @@
                     android:layout_weight="0.5"
                     android:onClick="onResetMap"
                     android:text="@string/reset_map"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="?android:attr/borderlessButtonStyle" />
             </LinearLayout>
 
             <RadioGroup

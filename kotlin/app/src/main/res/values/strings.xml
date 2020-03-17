@@ -181,4 +181,5 @@
     <string name="error">An error happened!</string>
     <string name="route_demo_label">Route Demo</string>
     <string name="route_demo_details">Demonstrates how to get and plot a route on the map</string>
+    <string name="geofencing_instructions">Click to define a geofence circle center</string>
 </resources>

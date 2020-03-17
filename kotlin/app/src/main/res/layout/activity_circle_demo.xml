@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright 2018 Google LLC
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
+
             <TextView android:text="@string/fill_hue" />
+
             <SeekBar android:id="@+id/fillHueSeekBar" />
         </TableRow>
 
@@ -42,7 +43,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
+
             <TextView android:text="@string/fill_alpha" />
+
             <SeekBar android:id="@+id/fillAlphaSeekBar" />
         </TableRow>
 
@@ -50,7 +53,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
+
             <TextView android:text="@string/stroke_width" />
+
             <SeekBar android:id="@+id/strokeWidthSeekBar" />
         </TableRow>
 
@@ -58,7 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
+
             <TextView android:text="@string/stroke_hue" />
+
             <SeekBar android:id="@+id/strokeHueSeekBar" />
         </TableRow>
 
@@ -66,7 +73,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
+
             <TextView android:text="@string/stroke_alpha" />
+
             <SeekBar android:id="@+id/strokeAlphaSeekBar" />
         </TableRow>
 
@@ -74,28 +83,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
+
             <TextView
                 android:text="@string/stroke_pattern"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
+
             <Spinner
                 android:id="@+id/strokePatternSpinner"
                 android:spinnerMode="dropdown"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
+
             <CheckBox
                 android:id="@+id/toggleClickability"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:onClick="toggleClickability"
-                android:text="@string/clickable"/>
+                android:text="@string/clickable" />
         </TableRow>
 
     </TableLayout>
@@ -104,6 +116,6 @@
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.google.android.gms.maps.SupportMapFragment"/>
+        class="com.google.android.gms.maps.SupportMapFragment" />
 
 </LinearLayout>
