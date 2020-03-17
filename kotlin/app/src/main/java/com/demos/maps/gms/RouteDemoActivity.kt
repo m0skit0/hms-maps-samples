@@ -60,26 +60,19 @@ class RouteDemoActivity : AppCompatActivity() {
 
     data class Bounds(
             @SerializedName("northeast")
-            val northeast: Northeast = Northeast(),
+            val northeast: Location = Location(),
             @SerializedName("southwest")
-            val southwest: Southwest = Southwest()
+            val southwest: Location = Location()
     )
 
-    data class Distance(
+    data class TextValue(
             @SerializedName("text")
             val text: String = "",
             @SerializedName("value")
             val value: Int = 0
     )
 
-    data class Duration(
-            @SerializedName("text")
-            val text: String = "",
-            @SerializedName("value")
-            val value: Int = 0
-    )
-
-    data class EndLocation(
+    data class Location(
             @SerializedName("lat")
             val lat: Double = 0.0,
             @SerializedName("lng")
@@ -88,30 +81,23 @@ class RouteDemoActivity : AppCompatActivity() {
 
     data class Leg(
             @SerializedName("distance")
-            val distance: Distance = Distance(),
+            val distance: TextValue = TextValue(),
             @SerializedName("duration")
-            val duration: Duration = Duration(),
+            val duration: TextValue = TextValue(),
             @SerializedName("end_address")
             val endAddress: String = "",
             @SerializedName("end_location")
-            val endLocation: EndLocation = EndLocation(),
+            val endLocation: Location = Location(),
             @SerializedName("start_address")
             val startAddress: String = "",
             @SerializedName("start_location")
-            val startLocation: StartLocation = StartLocation(),
+            val startLocation: Location = Location(),
             @SerializedName("steps")
             val steps: List<Step> = listOf(),
             @SerializedName("traffic_speed_entry")
             val trafficSpeedEntry: List<Any> = listOf(),
             @SerializedName("via_waypoint")
             val viaWaypoint: List<Any> = listOf()
-    )
-
-    data class Northeast(
-            @SerializedName("lat")
-            val lat: Double = 0.0,
-            @SerializedName("lng")
-            val lng: Double = 0.0
     )
 
     data class OverviewPolyline(
@@ -124,27 +110,13 @@ class RouteDemoActivity : AppCompatActivity() {
             val points: String = ""
     )
 
-    data class Southwest(
-            @SerializedName("lat")
-            val lat: Double = 0.0,
-            @SerializedName("lng")
-            val lng: Double = 0.0
-    )
-
-    data class StartLocation(
-            @SerializedName("lat")
-            val lat: Double = 0.0,
-            @SerializedName("lng")
-            val lng: Double = 0.0
-    )
-
     data class Step(
             @SerializedName("distance")
-            val distance: Distance = Distance(),
+            val distance: TextValue = TextValue(),
             @SerializedName("duration")
-            val duration: Duration = Duration(),
+            val duration: TextValue = TextValue(),
             @SerializedName("end_location")
-            val endLocation: EndLocation = EndLocation(),
+            val endLocation: Location = Location(),
             @SerializedName("html_instructions")
             val htmlInstructions: String = "",
             @SerializedName("maneuver")
@@ -152,12 +124,12 @@ class RouteDemoActivity : AppCompatActivity() {
             @SerializedName("polyline")
             val polyline: Polyline = Polyline(),
             @SerializedName("start_location")
-            val startLocation: StartLocation = StartLocation(),
+            val startLocation: Location = Location(),
             @SerializedName("travel_mode")
             val travelMode: String = ""
     )
 
-    interface MapsApi {
+    interface DirectionsApi {
         @GET("json")
         fun getDirections(
                 @Query("origin") origin: String,
@@ -195,7 +167,7 @@ class RouteDemoActivity : AppCompatActivity() {
     private fun askDirectionsAsync(): Deferred<Directions?> =
             GlobalScope.async(Dispatchers.IO) {
                 try {
-                    retrofit.create(MapsApi::class.java)
+                    retrofit.create(DirectionsApi::class.java)
                             .getDirections("Toronto", "Montreal", getString(R.string.google_maps_key))
                             .execute()
                             .run {
