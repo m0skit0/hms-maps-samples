@@ -3,3 +3,5 @@
 agconnect-services.json
 signing.gradle
 *.jks
+src/main/res/values/huawei_maps_api.xml
+src/main/res/values/google_maps_api.xml
