@@ -17,156 +17,97 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
+import retrofit2.http.Body
+import retrofit2.http.POST
 import retrofit2.http.Query
 import java.io.IOException
 
 class RouteDemoActivity : AppCompatActivity() {
 
-    data class Directions(
-            @SerializedName("geocoded_waypoints")
-            val geocodedWaypoints: List<GeocodedWaypoint> = listOf(),
-            @SerializedName("routes")
-            val routes: List<Route> = listOf(),
-            @SerializedName("status")
-            val status: String = ""
+    data class RouteServiceRequest(
+            @SerializedName("destination")
+            val destination: Location = Location(),
+            @SerializedName("origin")
+            val origin: Location = Location()
     )
 
-    data class GeocodedWaypoint(
-            @SerializedName("geocoder_status")
-            val geocoderStatus: String = "",
-            @SerializedName("place_id")
-            val placeId: String = "",
-            @SerializedName("types")
-            val types: List<String> = listOf()
+    data class Location(
+            @SerializedName("lat")
+            val lat: Double = 0.0,
+            @SerializedName("lng")
+            val lng: Double = 0.0
+    )
+
+    data class Routes(
+            @SerializedName("returnCode")
+            val returnCode: String = "",
+            @SerializedName("returnDesc")
+            val returnDesc: String = "",
+            @SerializedName("routes")
+            val routes: List<Route> = listOf()
     )
 
     data class Route(
             @SerializedName("bounds")
             val bounds: Bounds = Bounds(),
-            @SerializedName("copyrights")
-            val copyrights: String = "",
-            @SerializedName("legs")
-            val legs: List<Leg> = listOf(),
-            @SerializedName("overview_polyline")
-            val overviewPolyline: OverviewPolyline = OverviewPolyline(),
-            @SerializedName("summary")
-            val summary: String = "",
-            @SerializedName("warnings")
-            val warnings: List<Any> = listOf(),
-            @SerializedName("waypoint_order")
-            val waypointOrder: List<Int> = listOf()
+            @SerializedName("paths")
+            val paths: List<Path> = listOf()
+    )
+
+    data class Path(
+            @SerializedName("distance")
+            val distance: Int = 0,
+            @SerializedName("duration")
+            val duration: Int = 0,
+            @SerializedName("durationInTraffic")
+            val durationInTraffic: Int = 0,
+            @SerializedName("endLocation")
+            val endLocation: Location = Location(),
+            @SerializedName("startLocation")
+            val startLocation: Location = Location(),
+            @SerializedName("steps")
+            val steps: List<Step> = listOf()
     )
 
     data class Bounds(
             @SerializedName("northeast")
-            val northeast: Northeast = Northeast(),
+            val northeast: Location = Location(),
             @SerializedName("southwest")
-            val southwest: Southwest = Southwest()
-    )
-
-    data class Distance(
-            @SerializedName("text")
-            val text: String = "",
-            @SerializedName("value")
-            val value: Int = 0
-    )
-
-    data class Duration(
-            @SerializedName("text")
-            val text: String = "",
-            @SerializedName("value")
-            val value: Int = 0
-    )
-
-    data class EndLocation(
-            @SerializedName("lat")
-            val lat: Double = 0.0,
-            @SerializedName("lng")
-            val lng: Double = 0.0
-    )
-
-    data class Leg(
-            @SerializedName("distance")
-            val distance: Distance = Distance(),
-            @SerializedName("duration")
-            val duration: Duration = Duration(),
-            @SerializedName("end_address")
-            val endAddress: String = "",
-            @SerializedName("end_location")
-            val endLocation: EndLocation = EndLocation(),
-            @SerializedName("start_address")
-            val startAddress: String = "",
-            @SerializedName("start_location")
-            val startLocation: StartLocation = StartLocation(),
-            @SerializedName("steps")
-            val steps: List<Step> = listOf(),
-            @SerializedName("traffic_speed_entry")
-            val trafficSpeedEntry: List<Any> = listOf(),
-            @SerializedName("via_waypoint")
-            val viaWaypoint: List<Any> = listOf()
-    )
-
-    data class Northeast(
-            @SerializedName("lat")
-            val lat: Double = 0.0,
-            @SerializedName("lng")
-            val lng: Double = 0.0
-    )
-
-    data class OverviewPolyline(
-            @SerializedName("points")
-            val points: String = ""
-    )
-
-    data class Polyline(
-            @SerializedName("points")
-            val points: String = ""
-    )
-
-    data class Southwest(
-            @SerializedName("lat")
-            val lat: Double = 0.0,
-            @SerializedName("lng")
-            val lng: Double = 0.0
-    )
-
-    data class StartLocation(
-            @SerializedName("lat")
-            val lat: Double = 0.0,
-            @SerializedName("lng")
-            val lng: Double = 0.0
+            val southwest: Location = Location()
     )
 
     data class Step(
+            @SerializedName("action")
+            val action: String = "",
             @SerializedName("distance")
-            val distance: Distance = Distance(),
+            val distance: Int = 0,
             @SerializedName("duration")
-            val duration: Duration = Duration(),
-            @SerializedName("end_location")
-            val endLocation: EndLocation = EndLocation(),
-            @SerializedName("html_instructions")
-            val htmlInstructions: String = "",
-            @SerializedName("maneuver")
-            val maneuver: String = "",
+            val duration: Int = 0,
+            @SerializedName("endLocation")
+            val endLocation: Location = Location(),
+            @SerializedName("orientation")
+            val orientation: Int = 0,
             @SerializedName("polyline")
-            val polyline: Polyline = Polyline(),
-            @SerializedName("start_location")
-            val startLocation: StartLocation = StartLocation(),
-            @SerializedName("travel_mode")
-            val travelMode: String = ""
+            val polyline: List<Location> = listOf(),
+            @SerializedName("roadName")
+            val roadName: String = "",
+            @SerializedName("startLocation")
+            val startLocation: Location = Location()
     )
 
-    interface MapsApi {
-        @GET("json")
+    interface RoutesApi {
+        // Each type of route has a different "REST" endpoint
+        @POST("driving")
         fun getDirections(
-                @Query("origin") origin: String,
-                @Query("destination") destination: String,
-                @Query("key") key: String
-        ): Call<Directions>
+                @Query("key") key: String,
+                @Body request: RouteServiceRequest
+        ): Call<Routes>
     }
 
-    private val BASE_URL = "https://maps.googleapis.com/maps/api/directions/"
+    private val BASE_URL = "https://mapapi.cloud.huawei.com/mapApi/v1/routeService/"
+
+    private val TORONTO = Location(43.6532, -79.3832)
+    private val MONTREAL = Location(45.5017, -73.5673)
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
@@ -192,11 +133,12 @@ class RouteDemoActivity : AppCompatActivity() {
         }
     }
 
-    private fun askDirectionsAsync(): Deferred<Directions?> =
+    private fun askDirectionsAsync(): Deferred<Routes?> =
             GlobalScope.async(Dispatchers.IO) {
                 try {
-                    retrofit.create(MapsApi::class.java)
-                            .getDirections("Toronto", "Montreal", getString(R.string.google_maps_key))
+                    val request = RouteServiceRequest(TORONTO, MONTREAL)
+                    retrofit.create(RoutesApi::class.java)
+                            .getDirections(getString(R.string.huawei_maps_key), request)
                             .execute()
                             .run {
                                 if (isSuccessful) {
@@ -212,8 +154,8 @@ class RouteDemoActivity : AppCompatActivity() {
                 }
             }
 
-    private fun Directions.setMarkers(): Directions = apply {
-        routes[0].legs[0].run {
+    private fun Routes.setMarkers(): Routes = apply {
+        routes[0].paths[0].run {
             val startLocation = LatLng(startLocation.lat, startLocation.lng)
             val startMarker = MarkerOptions().position(startLocation)
             map.addMarker(startMarker)
@@ -227,43 +169,17 @@ class RouteDemoActivity : AppCompatActivity() {
         }
     }
 
-    private fun Directions.drawRoute(): Directions = apply {
+    private fun Routes.drawRoute(): Routes = apply {
         val polylineOptions = PolylineOptions()
                 .geodesic(true)
                 .color(resources.getColor(R.color.colorPrimary))
-                .addAll(routes[0].overviewPolyline.points.decodePath())
+                .addAll(
+                        routes[0].paths[0]
+                                .steps
+                                .map { it.polyline.map { LatLng(it.lat, it.lng) } }
+                                .flatten()
+                )
         map.addPolyline(polylineOptions)
-    }
-
-    private fun String.decodePath(): List<LatLng> {
-        val len = length
-        // For speed we preallocate to an upper bound on the final length, then
-        // truncate the array before returning.
-        val path: MutableList<LatLng> = mutableListOf()
-        var index = 0
-        var lat = 0
-        var lng = 0
-        while (index < len) {
-            var result = 1
-            var shift = 0
-            var b: Int
-            do {
-                b = this[index++].toInt() - 63 - 1
-                result += b shl shift
-                shift += 5
-            } while (b >= 0x1f)
-            lat += if (result and 1 != 0) (result shr 1).inv() else result shr 1
-            result = 1
-            shift = 0
-            do {
-                b = this[index++].toInt() - 63 - 1
-                result += b shl shift
-                shift += 5
-            } while (b >= 0x1f)
-            lng += if (result and 1 != 0) (result shr 1).inv() else result shr 1
-            path.add(LatLng(lat * 1e-5, lng * 1e-5))
-        }
-        return path
     }
 
     private fun toast(@StringRes id: Int) {
