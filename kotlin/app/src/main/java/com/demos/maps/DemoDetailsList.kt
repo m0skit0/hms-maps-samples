@@ -52,7 +52,9 @@ object DemoDetailsList {
             DemoDetails(R.string.geocoding_label, R.string.geocoding_demo_details,
                     GeocodingDemoActivity::class.java),
             DemoDetails(R.string.route_demo_label, R.string.route_demo_details,
-                    RouteDemoActivity::class.java)
+                    RouteDemoActivity::class.java),
+            DemoDetails(R.string.geofencing_demo_label, R.string.geofencing_demo_details,
+                    GeofencingDemoActivity::class.java)
     )
     val HMS_DEMOS = listOf(
             DemoDetails(R.string.basic_demo_label, R.string.basic_demo_details,

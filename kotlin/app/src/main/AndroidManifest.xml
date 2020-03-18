@@ -55,6 +55,7 @@
         <activity android:name=".gms.VisibleRegionDemoActivity"/>
         <activity android:name=".gms.GeocodingDemoActivity"/>
         <activity android:name=".gms.RouteDemoActivity"/>
+        <activity android:name=".gms.GeofencingDemoActivity"/>
 
         <activity android:name=".hms.BasicMapDemoActivity" />
         <activity android:name=".hms.CameraDemoActivity"/>
