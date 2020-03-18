@@ -69,4 +69,5 @@ dependencies {
     // HMS
     implementation 'com.huawei.hms:maps:4.0.1.300'
     implementation 'com.huawei.hms:site:4.0.1.300'
+    implementation 'com.huawei.hms:location:4.0.1.300'
 }

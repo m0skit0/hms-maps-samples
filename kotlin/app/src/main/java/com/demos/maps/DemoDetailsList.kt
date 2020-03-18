@@ -85,6 +85,8 @@ object DemoDetailsList {
             DemoDetails(R.string.geocoding_label, R.string.geocoding_demo_details,
                     com.demos.maps.hms.GeocodingDemoActivity::class.java),
             DemoDetails(R.string.route_demo_label, R.string.route_demo_details,
-                    com.demos.maps.hms.RouteDemoActivity::class.java)
+                    com.demos.maps.hms.RouteDemoActivity::class.java),
+            DemoDetails(R.string.geofencing_demo_label, R.string.geofencing_demo_details,
+                    GeofencingDemoActivity::class.java)
     )
 }

@@ -71,6 +71,7 @@
         <activity android:name=".hms.VisibleRegionDemoActivity"/>
         <activity android:name=".hms.GeocodingDemoActivity"/>
         <activity android:name=".hms.RouteDemoActivity"/>
+        <activity android:name=".hms.GeofencingDemoActivity"/>
     </application>
 
 </manifest>
