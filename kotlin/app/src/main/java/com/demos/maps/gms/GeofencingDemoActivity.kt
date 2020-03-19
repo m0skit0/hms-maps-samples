@@ -1,5 +1,7 @@
 package com.demos.maps.gms
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -16,6 +18,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import pub.devrel.easypermissions.AfterPermissionGranted
+import pub.devrel.easypermissions.EasyPermissions
 
 class GeofencingDemoActivity : AppCompatActivity() {
 
@@ -52,7 +56,7 @@ class GeofencingDemoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_geofencing_demo)
-
+        enableMyLocation()
         (supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).getMapAsync {
             map = it
             with (map) {
@@ -137,6 +141,39 @@ class GeofencingDemoActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         clearGeofence()
+    }
+
+    /** Override the onRequestPermissionResult to use EasyPermissions */
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    /**
+     * enableMyLocation() will enable the location of the map if the user has given permission
+     * for the app to access their device location.
+     * Android Studio requires an explicit check before setting map.isMyLocationEnabled to true
+     * but we are using EasyPermissions to handle it so we can suppress the "MissingPermission"
+     * check.
+     */
+    @SuppressLint("MissingPermission")
+    @AfterPermissionGranted(com.demos.maps.hms.REQUEST_CODE_LOCATION)
+    private fun enableMyLocation() {
+        if (hasLocationPermission()) {
+            map.isMyLocationEnabled = true
+        } else {
+            EasyPermissions.requestPermissions(this, getString(R.string.location),
+                    REQUEST_CODE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        }
+    }
+
+    private fun hasLocationPermission(): Boolean {
+        return EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_FINE_LOCATION)
     }
 
     private fun Geofence.asList(): List<Geofence> = listOf(this)
